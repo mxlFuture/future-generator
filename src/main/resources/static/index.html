@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<title>Future</title>
+	<link rel="stylesheet" href="layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="layui/css/global.css" media="all" />
+	<link rel="stylesheet" href="css/font-awesome/css/font-awesome.css" media="all" />
+
+</head>
+
+<body>
+<div class="layui-layout layui-layout-admin" style="border-bottom: solid 5px #294a2b;">
+	<!-- 标题栏 -->
+	<div class="layui-header header header-demo">
+		<div class="layui-main">
+			<div class="admin-login-box">
+				<a class="logo" style="left: 0;" href="/">
+					<span style="font-size: 22px;">Future逆向生成</span>
+				</a>
+				<div class="admin-side-toggle">
+					<i class="fa fa-bars" aria-hidden="true"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 菜单 -->
+	<div class="layui-side layui-bg-black" id="admin-side">
+		<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
+			<ul id="menu" class="layui-nav layui-nav-tree" lay-filter="demo">
+				<li><a  style="font-size: 20px; color: white" href="">逆向生成</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="layui-body" style="bottom: 0;border-left: solid 2px #294a2b;" id="admin-body">
+		<div class="layui-tab admin-nav-card layui-tab-brief" lay-allowClose="true" lay-filter="admin-tab">
+			<ul class="layui-tab-title">
+				 <li class="layui-this">
+                    <!--<i class="fa fa-dashboard" aria-hidden="true"></i>-->
+                    <cite>逆向生成</cite>
+                </li>
+			</ul>
+			<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;background: url('img/logo/index.jpg') no-repeat; background-size: cover;">
+
+                    <div class="layui-tab-item layui-show">
+                        <iframe src="pages/generate/edit.html"></iframe>
+                    </div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-footer footer footer-demo" id="admin-footer">
+		<div>
+			<p>copyright@2020-2020</p>
+		</div>
+	</div>
+	<div class="site-tree-mobile layui-hide">
+		<i class="layui-icon">&#xe602;</i>
+	</div>
+	<div class="site-mobile-shade"></div>
+
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script type="text/javascript" src="js/libs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/jq.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</div>
+</body>
+
+</html>

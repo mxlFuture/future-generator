@@ -1,0 +1,65 @@
+package {serviceImplPkgName};
+
+import java.util.List;
+import java.util.UUID;
+import java.util.Map;
+import javax.annotation.Resource;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import com.future.admin.server.constants.UserConstants;
+import com.future.admin.server.model.sys.User.Status;
+import com.future.admin.server.service.sys.UserService;
+import com.future.admin.server.utils.UserUtil;
+import {beanPackageName}.{beanName};
+import {daoPackageName}.{daoName};
+import {servicePkgName}.{serviceName};
+@Service
+public class {serviceName}Impl implements {serviceName} {
+
+	private static final Logger log = LoggerFactory.getLogger({serviceName}Impl.class);
+	
+	@Autowired
+	private {daoName} {daoParamName};
+
+	@Override
+	@Transactional
+	public {beanName} save{beanName}({beanName} {beanParamName}) {
+		{daoParamName}.save({beanParamName});
+		return {beanParamName};
+	}
+
+	@Override
+	public {beanName} get{beanName}(Long id) {
+		return {daoParamName}.getById(id);
+	}
+
+	@Override
+	@Transactional
+	public {beanName} update{beanName}({beanName} {beanParamName}) {
+		{daoParamName}.update({beanParamName});
+		return {beanParamName};
+	}
+	
+	@Override
+	@Transactional
+	public void delete{beanName}(Long id) {
+		{daoParamName}.delete(id);
+	}
+	
+	@Override
+	public int count(Map<String, Object> params){
+		return {daoParamName}.count(params);
+	}
+	
+	@Override
+	public List<{beanName}> list(Map<String, Object> params, Integer offset, Integer limit){
+		return {daoParamName}.list(params, offset, limit);
+	}
+}
