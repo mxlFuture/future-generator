@@ -180,7 +180,7 @@ public class TemplateUtil {
 		for (int i = 0; i < size; i++) {
 			String column = columnNames.get(i);
 			if (!"id".equals(column)) {
-				buffer.append("\t\t\t<if test=\"" + column + " != null\">\n");
+				buffer.append("\t\t\t<if test=\"params." + beanFieldName.get(i) + " != null and params." + beanFieldName.get(i) + " != ''\">\n");
 				buffer.append("\t\t\t\t" + column).append(" = ").append("#{").append(beanFieldName.get(i))
 						.append("}, \n");
 				buffer.append("\t\t\t</if>\n");
@@ -192,10 +192,10 @@ public class TemplateUtil {
 
 	private static String getWhere(List<String> columnNames, List<String> beanFieldName) {
 		StringBuffer buffer = new StringBuffer();
-		int size = columnNames.size();
+		int size = beanFieldName.size();
 		for (int i = 0; i < size; i++) {
 			String column = columnNames.get(i);
-			buffer.append("\t\t\t<if test=\"params." + column + " != null and params." + column + " != ''\">\n");
+			buffer.append("\t\t\t<if test=\"params." + beanFieldName.get(i) + " != null and params." + beanFieldName.get(i) + " != ''\">\n");
 			buffer.append("\t\t\t\tand " + column).append(" = ").append("#{params.").append(beanFieldName.get(i))
 					.append("} \n");
 			buffer.append("\t\t\t</if>\n");
