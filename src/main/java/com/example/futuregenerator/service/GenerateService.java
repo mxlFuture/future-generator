@@ -32,6 +32,8 @@ public interface GenerateService {
 	void saveCode(GenerateInput input);
 
 	String getTableDesc(String tableName);
-	
-	
+
+
+	//获取所有数据表
+    List<String> getTableNameList();
 }

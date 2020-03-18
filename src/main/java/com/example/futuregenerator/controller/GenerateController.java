@@ -24,6 +24,12 @@ public class GenerateController {
 	private GenerateService generateService;
 
 
+	@GetMapping("/getTableNameList")
+	public List<String> getTableNameList(){
+		List<String> list=generateService.getTableNameList();
+		return list;
+	}
+
 	@GetMapping(params = { "tableName" })
 	public GenerateDetail generateByTableName(String tableName) {
 		GenerateDetail detail = new GenerateDetail();

@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../layui/css/global.css" media="all" />
 </head>
 <body id="body" style="min-height: 150px; padding: 0 0 0;background: url('../img/index.jpg'); background-size: cover;">
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
@@ -11,9 +13,9 @@
             <div class="form-group" style="padding-top: 15px">
                 <label class="col-md-2 control-label">表名</label>
                 <div class="col-md-8">
-                    <input class="form-control" placeholder="这里输入表名" type="text" name="tableName" id="tableName"
+                    <input class="form-control layui-input"  placeholder="这里输入表名" type="text" name="tableName" id="tableName"
                         data-bv-notempty="true"
-                        data-bv-notempty-message="表名 不能为空">
+                           data-bv-notempty-message="表名 不能为空" >
                     <button id="showInfo" class="btn btn-primary">预览代码</button>
                     <button id="save" class="btn btn-primary">保存代码</button>
                 </div>
@@ -168,7 +170,24 @@
             }
         });
     });
-    
+    $("#tableName").click(function(){
+        console.info("1111");
+
+        $.ajax({
+            type : 'get',
+            url : '/generate/getTableNameList',
+            contentType: "application/json; charset=utf-8",
+            success : function(data) {
+
+                var list="<option value=''>请选择</option>";
+                $.each(data, function(k, v) {
+                    console.info(k,v);
+                    list+=("<option value ='" + v + "'>" + v + "</option>");
+                });
+                $("#tableName").html(list);
+            }
+        });
+    });
     $("#save").click(function(){
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();

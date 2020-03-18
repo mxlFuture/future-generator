@@ -8,6 +8,7 @@ import com.example.futuregenerator.utils.TemplateUtil;
 import com.google.common.collect.Maps;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,8 @@ public class GenerateServiceImpl implements GenerateService {
 	private String dbType;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-
+    @Value("${spring.datasource.url}")
+    private String tableSchema;
 	private RowMapper<BeanField> beanFieldMapper = new RowMapper<BeanField>() {
 
 		@Override
@@ -85,6 +87,18 @@ public class GenerateServiceImpl implements GenerateService {
 		}
 		return null;
 	}
+
+	@Override
+	public List<String> getTableNameList() {
+        List<String> list=null;
+		if(!"oracle".equals(dbType)){
+            String schema = tableSchema.substring(0, tableSchema.indexOf('?')).split("/")[3];
+			String sql="select table_name from information_schema.tables where table_schema=?";
+            list=jdbcTemplate.queryForList(sql, new Object[]{schema},String.class);
+		}
+		return list;
+	}
+
 	/**
 	 * mysql类型与java类型部分对应关系
 	 */
