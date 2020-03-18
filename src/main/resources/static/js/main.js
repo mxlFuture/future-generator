@@ -176,39 +176,5 @@ layui.use(['layer', 'element'], function() {
 	       });  
 	   }).resize();  
 	   
-	   //toggle左侧菜单  
-	   $('.admin-side-toggle').on('click', function() {
-	       var sideWidth = $('#admin-side').width();  
-	       if(sideWidth === 200) {  
-	           $('#admin-body').animate({  
-	               left: '0'  
-	           });
-	           $('#admin-footer').animate({  
-	               left: '0'  
-	           });  
-	           $('#admin-side').animate({  
-	               width: '0'  
-	           });  
-	       } else {  
-	           $('#admin-body').animate({  
-	               left: '200px'  
-	           });  
-	           $('#admin-footer').animate({  
-	               left: '200px'  
-	           });  
-	           $('#admin-side').animate({  
-	               width: '200px'  
-	               });  
-	           }  
-	       });
-	   
-	    //手机设备的简单适配
-	    var treeMobile = $('.site-tree-mobile'),
-	    shadeMobile = $('.site-mobile-shade');
-	    treeMobile.on('click', function () {
-	        $('body').addClass('site-mobile');
-	    });
-	    shadeMobile.on('click', function () {
-	        $('body').removeClass('site-mobile');
-	    });
+
 });

@@ -2,15 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.min.css">
 </head>
-<body>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<body id="body" style="min-height: 150px; padding: 0 0 0;background: url('../img/index.jpg'); background-size: cover;">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
-            <div class="form-group">
+            <div class="form-group" style="padding-top: 15px">
                 <label class="col-md-2 control-label">表名</label>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <input class="form-control" placeholder="这里输入表名" type="text" name="tableName" id="tableName"
                         data-bv-notempty="true"
                         data-bv-notempty-message="表名 不能为空">
@@ -101,11 +101,11 @@
     </form>
 </div>
 
-    <script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="../../js/jq.js"></script>
-    <script type="text/javascript" src="../../layui/layui.js"></script>
-	<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
-    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="../js/libs/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/jq.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+	<script type="text/javascript" src="../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript">
     layui.use('layer', function(){
 	    var layer = layui.layer;
@@ -116,6 +116,7 @@
     $("#save").hide();
     
     $("#showInfo").click(function(){
+        $("#body").removeAttr("style");
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
         if(!bootstrapValidator.isValid()){
