@@ -13,10 +13,10 @@
             <div class="form-group" style="padding-top: 15px">
                 <label class="col-md-2 control-label">表名</label>
                 <div class="col-md-8">
-                    <div>
+                    <div class="layui-form">
                         <select class="form-control"  placeholder="请选择表格" type="text" name="tableName" id="tableName"
                                data-bv-notempty="true"
-                                data-bv-notempty-message="表名 不能为空" lay-search="">
+                                data-bv-notempty-message="表名 不能为空"  lay-search>
                         </select>
                     </div>
                     <div style="padding-top: 10px">
@@ -114,7 +114,8 @@
 	<script type="text/javascript" src="../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript">
-    layui.use('layer', function(){
+        var form;
+    layui.use(['layer','form'], function(){
 	    var layer = layui.layer;
 	});
     
@@ -184,7 +185,6 @@
             success : function(data) {
                 var list="<option value=''>请选择表格</option>";
                 $.each(data, function(k, v) {
-                    console.info(k,v);
                     list+=("<option value ='" + v + "'>" + v + "</option>");
                 });
                 $("#tableName").html(list);
