@@ -62,20 +62,31 @@ public class GenerateServiceImpl implements GenerateService {
 		if(map==null || map.size()==0) {
 			initMap();
 		}
-		beanFields.parallelStream().forEach(b -> {
+		for (int i = 0; i<beanFields.size() ; i++) {
+			BeanField b = beanFields.get(i);
 			b.setName(StrUtil.str2hump(b.getColumnName()));
-			String type = map.get(b.getColumnType());
-			if (type == null) {
-				type = String.class.getSimpleName();
+			String type =b.getColumnType();
+			if(type.equals("int")){
+				type="Integer";
+			}else if(type.equals("bigint")){
+				type="Long";
+			}else if(type.equals("varchar") || type.equals("char") ){
+				type="String";
+			}else if(type.equals("date") || type.equals("time") || type.equals("datetime")){
+				type="Date";
+			}else if(type.equals("float") || type.equals("double")){
+				type="Double";
+			}else if(type.equals("decimal")){
+				type="BigDecimal";
+			}else{
+				type="String";
 			}
 			b.setType(type);
 			if ("id".equals(b.getName())) {
 				b.setType(Long.class.getSimpleName());
 			}
-
 			b.setColumnDefault(b.getColumnDefault() == null ? "" : b.getColumnDefault());
-		});
-
+		}
 		return beanFields;
 	}
 	@Override
@@ -141,7 +152,7 @@ public class GenerateServiceImpl implements GenerateService {
 	@Override
 	public void saveCode(GenerateInput input) {
 		TemplateUtil.saveJava(input);
-		TemplateUtil.saveJavaDao(input);
+		TemplateUtil.saveJavaDao(input,listBeanField(input.getTableName()));
 		TemplateUtil.saveService(input);
 		TemplateUtil.saveController(input);
 		//TemplateUtil.saveHtmlList(input);

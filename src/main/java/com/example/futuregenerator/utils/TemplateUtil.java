@@ -1,5 +1,6 @@
 package com.example.futuregenerator.utils;
 
+import com.example.futuregenerator.base.BeanField;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
@@ -60,7 +61,7 @@ public class TemplateUtil {
 				continue;
 			}
 			String type = beanFieldType.get(i);
-			buffer.append("\t@ApiModelProperty(value = \""+desc.get(i)+"\")");
+			buffer.append("\t/**"+desc.get(i)+"*/\n");
 			buffer.append("\tprivate ").append(type).append(" ").append(name);
 			// 默认值
 //			String value = beanFieldValue.get(i);
@@ -78,7 +79,7 @@ public class TemplateUtil {
 //
 //				buffer.append(value);
 //			}
-			buffer.append(";\t\t//"+desc.get(i)+"\n");
+			buffer.append(";\n");
 		}
 
 		return buffer.toString();
@@ -109,7 +110,7 @@ public class TemplateUtil {
 		return buffer.toString();
 	}
 
-	public static void saveJavaDao(GenerateInput input) {
+	public static void saveJavaDao(GenerateInput input, List<BeanField> list) {
 		String path = input.getPath();
 		String tableName = input.getTableName();
 		String beanPackageName = input.getBeanPackageName();
@@ -133,7 +134,10 @@ public class TemplateUtil {
 		log.debug("生成java dao：{}模板", beanName);
 
 		text = getTemplete("mapper.xml");
+		String resMap = getResMap(input.getColumnNames(), input.getBeanFieldName(),list);
+		text = text.replace("{resMap}",resMap);
 		text = text.replace("{daoPackageName}", daoPackageName);
+		text = text.replace("{beanPackageName}", beanPackageName);
 		text = text.replace("{daoName}", daoName);
 		text = text.replace("{insert_columns}", insertColumns);
 		text = text.replace("{insert_values}", insertValues);
@@ -145,7 +149,38 @@ public class TemplateUtil {
 		text = text.replace("{where}", where);
 		FileUtil.saveTextFile(text, path + File.separator + "src\\main\\resources\\mybatis-mappers\\"+ beanName + "Mapper.xml");
 	}
+	private static String getResMap(List<String> columnNameList, List<String> beanFieldNameList,List<BeanField> list){
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < columnNameList.size(); i++) {
+			String beanFieldName = beanFieldNameList.get(i);
+			String column = columnNameList.get(i);
+			BeanField beanField = list.get(i);
+			if(i==0){
+				buffer.append("\t\t<id column=\"").append(column).append("\" property=\"").append(beanFieldName).append("\" jdbcType=\"");
+				if(beanField.getColumnType().equals("int")){
+					buffer.append("INTEGER\" />\n");
+				}else if(beanField.getColumnType().equals("bigint")){
+					buffer.append("BIGINT\" />\n");
+				}else{
+					buffer.append("VARCHAR\" />\n");
+				}
+			}else{
+				buffer.append("\t\t<result column=\"").append(column).append("\" property=\"").append(beanFieldName).append("\" jdbcType=\"");
+				if(beanField.getColumnType().equals("int")){
+					buffer.append("INTEGER\" />\n");
+				}else if(beanField.getColumnType().equals("bigint")){
+					buffer.append("BIGINT\" />\n");
+				}else{
+					buffer.append("VARCHAR\" />\n");
+				}
+			}
 
+		}
+
+		String str = StringUtils.substringBeforeLast(buffer.toString(), ",");
+
+		return str;
+	}
 	private static String getInsertValues(List<String> columnNames, List<String> beanFieldName) {
 		StringBuffer buffer = new StringBuffer();
 		int size = columnNames.size();

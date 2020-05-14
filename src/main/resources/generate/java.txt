@@ -1,14 +1,12 @@
 package {beanPackageName};
 
 {import}
-import com.future.admin.server.model.base.BaseEntity;
-import io.swagger.annotations.ApiModelProperty;
 /**
  * {beanDesc}
  * @author 
  * @date{date1}	
  */
-public class {beanName} extends BaseEntity<Long> {
+public class {beanName} {
 
 {filelds}
 {getset}

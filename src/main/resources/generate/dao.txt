@@ -16,18 +16,18 @@ import {beanPackageName}.{beanName};
 public interface {daoName} {
 
     @Select("select * from {table_name} t where t.id = #{id}")
-    {beanName} getById(Long id);
+    {beanName} get{beanName}ById(Long id);
 
     @Delete("delete from {table_name} where id = #{id}")
-    int delete(Long id);
+    int delete{beanName}(Long id);
 
-    int update({beanName} {beanParamName});
+    int update{beanName}({beanName} {beanParamName});
     
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into {table_name}({insert_columns}) values({insert_values})")
-    int save({beanName} {beanParamName});
+    int save{beanName}({beanName} {beanParamName});
     
-    int count(@Param("params") Map<String, Object> params);
+    int count{beanName}(@Param("params") Map<String, Object> params);
 
-    List<{beanName}> list(@Param("params") Map<String, Object> params, @Param("offset") Integer offset, @Param("limit") Integer limit);
+    List<{beanName}> list{beanName}(@Param("params") Map<String, Object> params, @Param("offset") Integer offset, @Param("limit") Integer limit);
 }
