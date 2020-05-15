@@ -36,25 +36,5 @@ function print(obj){
 	console.log(JSON.stringify(obj));
 	console.log(obj);
 }
-// 检查登录状态
-function loginInfo(){
-	var user = "";
-    $.ajax({
-        type : 'get',
-        url : '/sys/login',
-        async: false,
-        success : function(data){
-            if(data != null && data != ""){
-                user = data;
-            }
-        },
-        error: function(xhr,textStatus,errorThrown){
-            var msg = xhr.responseText;
-            var response = JSON.parse(msg);
-            $("#info").html(response.message);
-        }
-    });
-    
-    return user;
-}
+
 

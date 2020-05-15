@@ -147,7 +147,7 @@ public class TemplateUtil {
 		text = text.replace("{update_sets}", sets);
 		String where = getWhere(input.getColumnNames(), input.getBeanFieldName());
 		text = text.replace("{where}", where);
-		FileUtil.saveTextFile(text, path + File.separator + "src\\main\\resources\\mybatis-mappers\\"+ beanName + "Mapper.xml");
+		FileUtil.saveTextFile(text, path + File.separator + "src\\main\\java\\"+ getPackagePath(daoPackageName) + beanName + "Mapper.xml");
 	}
 	private static String getResMap(List<String> columnNameList, List<String> beanFieldNameList,List<BeanField> list){
 		StringBuffer buffer = new StringBuffer();

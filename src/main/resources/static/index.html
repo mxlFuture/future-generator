@@ -1,59 +1,279 @@
 ﻿<!DOCTYPE html>
-
 <html>
-
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="format-detection" content="telephone=no">
-	<title>Future</title>
-	<link rel="icon" href="img/favicon.ico" type="image/gif">
-	<link rel="stylesheet" href="layui/css/layui.css" media="all" />
-	<link rel="stylesheet" href="layui/css/global.css" media="all" />
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>Future</title>
+    <link rel="icon" href="img/favicon.ico" type="image/gif">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="layui/css/global.css" media="all"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
 </head>
-<body >
-<div class="layui-layout layui-layout-admin" >
-	<!-- 标题栏 -->
-	<div class="layui-header header header-demo">
-		<div class="layui-main">
-			<div class="admin-login-box">
-				<a class="logo" style="left: 0;" href="/">
-					<span style="font-size: 22px;">Future逆向生成</span>
-				</a>
-			</div>
-		</div>
-	</div>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <!-- 标题栏 -->
+    <div class="layui-header header header-demo">
+        <div class="layui-main">
+            <div class="admin-login-box">
+                <a class="logo" style="left: 0;" href="/">
+                    <span style="font-size: 22px;">Future逆向生成</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
-	<div class="" style="bottom: 0;" id="admin-body">
-		<div class="layui-tab admin-nav-card layui-tab-brief" lay-allowClose="true" lay-filter="admin-tab">
+    <div class="" style="bottom: 0;" id="admin-body">
+        <div class="layui-tab admin-nav-card layui-tab-brief" lay-allowClose="true" lay-filter="admin-tab">
 
-			<div class="layui-tab-content" >
+            <div class="layui-tab-content">
 
-                    <div class="layui-tab-item layui-show">
-                        <iframe src="generate/edit.html"></iframe>
+                <div class="layui-tab-item layui-show">
+                    <body id="body"
+                          style="min-height: 150px; padding: 0 0 0;background: url('img/index.jpg'); background-size: cover;">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <form class="form-horizontal" onsubmit="return false" id="form">
+                            <fieldset>
+                                <div class="form-group" style="padding-top: 15px">
+                                    <label class="col-md-2 control-label">表名</label>
+                                    <div class="col-md-8">
+                                        <div class="layui-form">
+                                            <select class="form-control" placeholder="请选择表格" type="text"
+                                                    name="tableName" id="tableName"
+                                                    data-bv-notempty="true"
+                                                    data-bv-notempty-message="表名 不能为空" lay-search>
+                                            </select>
+                                        </div>
+                                        <div style="padding-top: 10px">
+                                            <button id="showInfo" class="btn btn-primary">预览代码</button>
+                                            <button id="save" class="btn btn-primary">保存代码</button>
+                                            <!--<button id="Export" class="btn btn-primary">导出代码</button>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div id="detail">
+                                <fieldset>
+                                    <table class="table">
+                                        <caption>基本配置</caption>
+                                        <tbody>
+                                        <tr>
+                                            <td width="10%">路径</td>
+                                            <td>
+                                                <input class="form-control" placeholder="路径" type="text" name="path"
+                                                       id="path" value="d:/generate"
+                                                       data-bv-notempty="true"
+                                                       data-bv-notempty-message="路径 不能为空">
+                                            </td>
+                                            <td width="10%"></td>
+                                            <td width="15%"></td>
+                                            <td width="5%"></td>
+                                            <td></td>
+                                            <td width="5%"></td>
+                                            <td width="15%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>bean包名</td>
+                                            <td>
+                                                <input name="beanDesc" value="" type="hidden" id="beanDesc"/>
+                                                <input class="form-control" placeholder="bean包名" type="text"
+                                                       name="beanPackageName" id="beanPackageName"
+                                                       value="com.future.admin.server.model"
+                                                       data-bv-notempty="true"
+                                                       data-bv-notempty-message="bean包名 不能为空">
+                                            </td>
+                                            <td>bean类名</td>
+                                            <td>
+                                                <input class="form-control" placeholder="bean类名" type="text"
+                                                       name="beanName" id="beanName" value="BeanTest"
+                                                       data-bv-notempty="true"
+                                                       data-bv-notempty-message="bean类名 不能为空">
+                                            </td>
+                                            <td>dao包名</td>
+                                            <td>
+                                                <input class="form-control" placeholder="dao包名" type="text"
+                                                       name="daoPackageName" id="daoPackageName"
+                                                       value="com.future.admin.server.dao"
+                                                       data-bv-notempty="true"
+                                                       data-bv-notempty-message="dao包名 不能为空">
+                                            </td>
+                                            <td>dao类名</td>
+                                            <td>
+                                                <input class="form-control" placeholder="dao类名" type="text"
+                                                       name="daoName" id="daoName" value="BeanTestDao"
+                                                       data-bv-notempty="true"
+                                                       data-bv-notempty-message="dao类名 不能为空">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>controller包名</td>
+                                            <td>
+                                                <input class="form-control" placeholder="controller包名" type="text"
+                                                       name="controllerPkgName" id="controllerPkgName"
+                                                       value="com.future.admin.server.controller"
+                                                       data-bv-notempty="true"
+                                                       data-bv-notempty-message="bean包名 不能为空">
+                                            </td>
+                                            <td>controller类名</td>
+                                            <td>
+                                                <input class="form-control" placeholder="controller类名" type="text"
+                                                       name="controllerName" id="controllerName" value="ControllerTest"
+                                                       data-bv-notempty="true"
+                                                       data-bv-notempty-message="bean类名 不能为空">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                                <table class="table">
+                                    <caption>字段详情</caption>
+                                    <thead>
+                                    <tr>
+                                        <th>表字段名</th>
+                                        <th>表类型</th>
+                                        <th>字段描述</th>
+                                        <th>java字段名</th>
+                                        <th>java字段类型</th>
+                                        <th>默认值(数据表中的默认值)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="beanFields">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
                     </div>
-			</div>
-		</div>
-	</div>
-	<div class="footer footer-demo" id="admin-footer">
-		<div>
-			<p>copyright@2020-2020</p>
-		</div>
-	</div>
-	<div class="site-tree-mobile layui-hide">
-		<i class="layui-icon">&#xe602;</i>
-	</div>
-	<div class="site-mobile-shade"></div>
+                    </body>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<script type="text/javascript" src="layui/layui.js"></script>
-	<script type="text/javascript" src="js/libs/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/jq.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
+    </div>
+    <div class="site-mobile-shade"></div>
 </div>
-</body>
+<script type="text/javascript" src="js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="layui/layui.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+    var list="";
+    var layer="";
+    var form="";
+    layui.use(['layer', 'form'], function () {
+        layer = layui.layer;
+        form =layui.form;
+        $.ajax({
+            type: 'get',
+            url: '/generate/getTableNameList',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                list = "<option value=''>请选择表格</option>";
+                $.each(data, function (k, v) {
+                    list += ("<option value ='" + v + "'>" + v + "</option>");
+                });
+                $("#tableName").html(list);
+                form.render('select');
+            }
+        });
+    });
 
+    $('#form').bootstrapValidator();
+    $("#detail").hide();
+    // $("#save").hide();
+
+    $("#showInfo").click(function () {
+        if($("#tableName").val()==null || $("#tableName").val()==""){
+            layer.msg("请先选中表格");
+            return;
+        }
+        $("#body").removeAttr("style");
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        console.log(bootstrapValidator);
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var beanFields = $("#beanFields");
+        beanFields.html("");
+        $.ajax({
+            type: 'get',
+            url: '/generate',
+            data: "tableName=" + $("#tableName").val(),
+            success: function (data) {
+                $("#detail").show();
+                $("#save").show();
+                var beanName = data.beanName;
+                $("#beanName").val(beanName);
+                $("#daoName").val(beanName + "Dao");
+                $("#controllerName").val(beanName + "Controller");
+                $("#path").val(data.path);
+                $("#beanDesc").val(data.beanDesc);
+                var fields = data.fields;
+                var length = fields.length;
+
+                for (var i = 0; i < length; i++) {
+                    var f = fields[i];
+                    var tr = $("<tr></tr>");
+
+                    var columnName = f['columnName'];
+                    var columnNameInput = "<input type='hidden' name='columnNames' value='" + columnName + "'>"
+
+                    tr.append("<td>" + columnNameInput + columnName + "</td>");
+                    tr.append("<td>" + f['columnType'] + "</td>");
+                    tr.append("<td>" + f['columnComment'] + "</td><input name='beanFieldDesc' value='" + f['columnComment'] + "' type='hidden'/>");
+                    var name = f['name'];
+
+                    var nameInput = "<input name='beanFieldName' class='form-control' value='" + name + "'>";
+                    tr.append("<td>" + nameInput + "</td>");
+
+                    var type = f['type'];
+                    var typeInput = "<input name='beanFieldType' class='form-control' value='" + type + "'>"
+                    tr.append("<td>" + typeInput + "</td>");
+
+                    var val = f['columnDefault'];
+                    var valInput = "<input name='beanFieldValue' class='form-control' value='" + val + "'>"
+                    tr.append("<td>" + valInput + "</td>");
+
+                    beanFields.append(tr);
+                }
+            }
+        });
+    });
+
+    $("#save").click(function () {
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        if ($("#detail").is(':hidden')) {
+            layer.msg("请先选中表格预览代码");
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'post',
+            url: '/generate',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                $("#detail").hide();
+                //$("#save").hide();
+                layer.msg("生成成功");
+            }
+        });
+        $("#body").attr("style","min-height: 150px; padding: 0 0 0;background: url('img/index.jpg'); background-size: cover;");
+    });
+    $("#Export").click(function browseFolder() {
+
+    });
+</script>
+</body>
 </html>
