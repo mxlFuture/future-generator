@@ -21,9 +21,6 @@ import java.util.Properties;
 
 /**
  * Druid数据源配置
- * 
- * @author liubing
- *
  */
 
 @Configuration
@@ -96,8 +93,6 @@ public class DruidConfig {
     
 	/**
 	 * 数据源配置
-	 * 
-	 * @author liubing
 	 *
 	 */
 	@ConfigurationProperties(prefix = "spring.datasource")

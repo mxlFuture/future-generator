@@ -12,9 +12,6 @@ import java.util.List;
 
 /**
  * 代码生成接口
- * 
- * @author liubing
- *
  */
 @RestController
 @RequestMapping("/generate")

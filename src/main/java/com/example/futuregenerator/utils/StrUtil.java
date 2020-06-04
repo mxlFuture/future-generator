@@ -6,9 +6,6 @@ import java.util.List;
 
 /**
  * 字符串转化工具类
- * 
- * @author liubing
- *
  */
 public class StrUtil {
 

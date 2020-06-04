@@ -8,9 +8,6 @@ import java.time.LocalDate;
 
 /**
  * 文件工具类
- * 
- * @author liubing
- *
  */
 public class FileUtil {
 
